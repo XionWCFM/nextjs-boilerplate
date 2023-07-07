@@ -4,3 +4,4 @@
 echo 'Hello i m gonna check your code!'
 npm run lint
 npm run lint:fix
+npx lint-staged
