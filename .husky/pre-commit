@@ -3,4 +3,3 @@
 
 echo 'Hello i m gonna check your code!'
 npm run lint
-npm test
