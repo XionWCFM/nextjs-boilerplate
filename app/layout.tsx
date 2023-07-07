@@ -1,3 +1,4 @@
+import React from 'react';
 import '@/styles/globals.css';
 import '@/styles/animation.css';
 import '@/styles/style.css';
