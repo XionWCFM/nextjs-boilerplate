@@ -5,6 +5,16 @@
   },
   "rules": {
     "react/jsx-props-no-spreading": "off",
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": true,
+        "peerDependencies": false
+      }
+    ],
+    "import/prefer-default-export": ["off", { "target": "single" }],
+    "operator-linebreak": [0]
   }
 }

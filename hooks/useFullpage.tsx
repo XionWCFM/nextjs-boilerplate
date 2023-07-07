@@ -15,26 +15,22 @@ const useFullPage = (pageList: PageList[]) => {
   const [timestamp, setTimestamp] = React.useState(0);
 
   const currentPageChange = useThrottle(
-    React.useCallback(
-      (event: Event) => {
-        let scroll = windowObj?.scrollY!;
-        console.log('왜 실행됨?');
-        for (let i = 1; i <= totalPageLen; i++) {
-          if (
-            scroll >
-              pageRefList.current[i].offsetTop - windowObj!.outerHeight / 3 &&
-            scroll <
-              pageRefList.current[i].offsetTop -
-                windowObj!.outerHeight / 3 +
-                pageRefList.current[i].offsetHeight
-          ) {
-            setCurrentPageNum(i);
-            break;
-          }
+    React.useCallback(() => {
+      const scroll = windowObj?.scrollY!;
+      for (let i = 1; i <= totalPageLen; i += 1) {
+        if (
+          scroll >
+            pageRefList.current[i].offsetTop - windowObj!.outerHeight / 3 &&
+          scroll <
+            pageRefList.current[i].offsetTop -
+              windowObj!.outerHeight / 3 +
+              pageRefList.current[i].offsetHeight
+        ) {
+          setCurrentPageNum(i);
+          break;
         }
-      },
-      [totalPageLen, windowObj],
-    ),
+      }
+    }, [totalPageLen, windowObj]),
     500,
   );
 
@@ -49,7 +45,7 @@ const useFullPage = (pageList: PageList[]) => {
     (event: WheelEvent) => {
       event.preventDefault();
 
-      if (1000 > event.timeStamp - timestamp) return;
+      if (event.timeStamp - timestamp < 1000) return;
 
       if (event.deltaY < 0 && currentPageNum > 1) {
         windowObj?.scrollTo({
